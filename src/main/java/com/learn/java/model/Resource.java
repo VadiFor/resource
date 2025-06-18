@@ -1,5 +1,6 @@
 package com.learn.java.model;
 
+import com.learn.java.model.enums.StatusResource;
 import com.learn.java.model.enums.TypeResource;
 import jakarta.persistence.*;
 import lombok.*;
@@ -28,6 +29,7 @@ public class Resource {
 	
 	private String location;
 	
-	@Column(nullable = false)
-	private Boolean available;
+	@Column(length = 20, nullable = false)
+	@Enumerated(EnumType.STRING)
+	private StatusResource status;
 }
