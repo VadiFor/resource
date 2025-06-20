@@ -1,8 +1,8 @@
 package com.learn.java.controller;
 
+import com.learn.java.dto.ResourceCreateRequestDto;
+import com.learn.java.dto.ResourceUpdateRequestDto;
 import com.learn.java.model.Resource;
-import com.learn.java.model.enums.StatusResource;
-import com.learn.java.model.enums.TypeResource;
 import com.learn.java.service.ResourceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -22,20 +22,18 @@ public class ResourceController {
 	
 	@GetMapping("/{id}")
 	public Resource getResource(@PathVariable String id) {
-		return resourceService.getResource(id);
+		return resourceService.getById(id);
 	}
 	
 	@PostMapping
-	public Resource createResource(@RequestParam("name") String name,
-								   @RequestParam("type") TypeResource type,
-								   @RequestParam("location") String location,
-								   @RequestParam("status") StatusResource status) {
-		return resourceService.create(name, type, location, status);
+	public Resource createResource(@RequestBody ResourceCreateRequestDto resourceCreateRequestDto) {
+		return resourceService.create(resourceCreateRequestDto);
 	}
 	
-	@PatchMapping
-	public Resource updateResource(@RequestBody Resource resource) {
-		return resourceService.update(resource.getId(), resource.getName(), resource.getType(), resource.getLocation(), resource.getStatus());
+	@PatchMapping("/{id}")
+	public Resource updateResource(@PathVariable String id,
+								   @RequestBody ResourceUpdateRequestDto resourceUpdateRequestDto) {
+		return resourceService.update(id, resourceUpdateRequestDto);
 	}
 	
 	@DeleteMapping("/{id}")

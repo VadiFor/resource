@@ -1,19 +1,19 @@
 package com.learn.java.service;
 
+import com.learn.java.dto.ResourceCreateRequestDto;
+import com.learn.java.dto.ResourceUpdateRequestDto;
 import com.learn.java.model.Resource;
-import com.learn.java.model.enums.StatusResource;
-import com.learn.java.model.enums.TypeResource;
 
 import java.util.List;
 
 public interface ResourceService {
-	Resource create(String name, TypeResource type, String location, StatusResource status);
+	Resource create(ResourceCreateRequestDto resourceCreateRequestDto);
 	
-	Resource update(String id, String name, TypeResource type, String location, StatusResource status);
+	Resource update(String id, ResourceUpdateRequestDto resourceUpdateRequestDto);
 	
 	String delete(String id);
 	
-	Resource getResource(String id);
+	Resource getById(String id);
 	
 	List<Resource> getAllResources();
 }
